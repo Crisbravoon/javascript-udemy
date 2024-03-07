@@ -451,19 +451,11 @@
       "gender": "male"
     },
     {
-      "id": 51
-    },
-    {
-      "id": 52
-    },
-    {
-      "id": 53
-    },
-    {
-      "id": 54
-    },
-    {
-      "id": 55
+      "balance": 123,
+      "first_name": "Cristobal",
+      "last_name": "Bravo",
+      "isActive": true,
+      "id": 61
     }
   ]
 }

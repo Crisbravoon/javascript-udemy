@@ -1,7 +1,7 @@
 
 //Para saber como viene la data y adaptarlo para poder utilizarlo como quiero
 
-import { User } from "./user"
+import { User } from "../models/user"
 
 /**
  * 

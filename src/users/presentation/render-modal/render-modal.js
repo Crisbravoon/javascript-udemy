@@ -1,12 +1,35 @@
 
-import modalHtml from './render-modal.html?raw';
 import './render-modal.css';
+import modalHtml from './render-modal.html?raw';
+import { getUserById } from '../../usecases/get-user-by-id';
 
-let modal, form;
+let modal, form, loadedUser={};
+
+/**
+ * 
+ * @param {String|Number} id 
+ */
 
 //Cargar usuarios por id
-export const showModal = () => {
+export const showModal = async (id) => {
     modal?.classList.remove('hide-modal');
+    loadedUser={};
+
+    if (!id) return;
+
+    const user = await getUserById(id);
+    setFormValues(user);
+};
+
+
+const setFormValues = (user) => {
+    form.querySelector('[name="firstName"]').value = user.firstName;
+    form.querySelector('[name="lastName"]').value = user.lastName;
+    form.querySelector('[name="balance"]').value = user.balance;
+    form.querySelector('[name="isActive"]').checked = user.isActive;
+
+    //
+    loadedUser = user;
 };
 
 // Limpiar formulario
@@ -48,18 +71,18 @@ export const renderModal = (element, callback) => {
      * para poder enviar bien la data al Back End
      */
 
-    form.addEventListener('submit', async(e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const formData = new FormData(form);
-        const userLike = {};
+        const userLike = {...loadedUser};
 
         ///
         for (const [key, value] of formData) {
 
             if (key === 'balance') {
                 // Agregando el Balance a la data
-                userLike[key] = + value;
+                userLike[key] = +value;
                 continue;
             }
 
@@ -71,7 +94,9 @@ export const renderModal = (element, callback) => {
             userLike[key] = value;
         }
 
+    //Se tiene la info del formulario y no info adicional
         await callback(userLike);
+       
         hideModal();
     });
 
