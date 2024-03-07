@@ -456,6 +456,13 @@
       "last_name": "Bravo",
       "isActive": true,
       "id": 61
+    },
+    {
+      "balance": 123123123,
+      "first_name": "Probando",
+      "last_name": "Probando",
+      "isActive": true,
+      "id": 62
     }
   ]
 }

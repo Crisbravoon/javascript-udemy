@@ -13,12 +13,13 @@ let modal, form, loadedUser={};
 //Cargar usuarios por id
 export const showModal = async (id) => {
     modal?.classList.remove('hide-modal');
-    loadedUser={};
 
-    if (!id) return;
+    loadedUser = {};
 
-    const user = await getUserById(id);
-    setFormValues(user);
+    if ( !id ) return;
+
+    const user = await getUserById( id );
+    setFormValues( user );
 };
 
 
